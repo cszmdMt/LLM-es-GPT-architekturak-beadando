@@ -18,8 +18,8 @@ if "analysis_summary" not in st.session_state:
 
         analysis_prompt = (
             "Kérlek, írj egy profi, lényegretörő vezetői összefoglalót (executive summary) "
-                "a dokumentum tartalmáról körülbelül 4-5 mondatban. Ez alatt, egy új bekezdésben "
-                "sorold fel a dokumentum 5 legfontosabb kulcsszavát vagy kifejezését bullet pontokba szedve."
+            "a dokumentum tartalmáról körülbelül 4-5 mondatban. Ez alatt, egy új bekezdésben "
+            "sorold fel a dokumentum 5 legfontosabb kulcsszavát vagy kifejezését bullet pontokba szedve."
         )
 
         response = get_ai_response(analysis_prompt, st.session_state.text_chunks)

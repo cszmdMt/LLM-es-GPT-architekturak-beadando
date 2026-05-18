@@ -13,7 +13,6 @@ def extract_text_from_pdf(pdf_files):
     """
     text = ""
     for pdf_file in pdf_files:
-        # Open the PDF from the stream
         doc = fitz.open(stream=pdf_file.read(), filetype="pdf")
         for page in doc:
             text += page.get_text()
