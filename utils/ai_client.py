@@ -1,8 +1,8 @@
 import os 
 import logging
 
-from google import generativeai
-from google.generativeai import types
+from google import genai
+from google.genai import types
 
 
 def get_ai_response(prompt, context_chunks):
@@ -12,7 +12,7 @@ def get_ai_response(prompt, context_chunks):
     if not api_key or api_key is None:
         logging.error("Nincs beállítva API-kulcs az .env fájlban!")
 
-    client = generativeai.Client(api_key=api_key)
+    client = genai.Client(api_key=api_key)
 
     context_text = "\n".join(context_chunks)
 
