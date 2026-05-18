@@ -1,6 +1,5 @@
 streamlit
 python-dotenv
-openai
+google-genai
 PyPDF2
 langchain
-chromadb
