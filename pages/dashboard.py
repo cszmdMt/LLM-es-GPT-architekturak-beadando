@@ -36,6 +36,9 @@ if st.button("Feldolgozás indítása", type="primary"):
             st.session_state.text_chunks = chunks
             st.session_state.is_processed = True
 
+            if "analysis_summary" in st.session_state:
+                del st.session_state.analysis_summary
+
         st.success("A PDF feldolgozása, sikeres volt!")
 
     else:

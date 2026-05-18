@@ -1,10 +1,14 @@
 import streamlit as st
 
+from utils.style_injector import inject_custom_css
+
 st.set_page_config(
     page_title="Intelligens-Dokumentum-Elemző",
     page_icon="🐕",
     layout="wide"
 )
+
+inject_custom_css()
 
 dashboard_page = st.Page(
     "pages/dashboard.py",
