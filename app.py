@@ -1,12 +1,29 @@
-"""
-Main entry point for the Streamlit Intelligent Document Analysis and Knowledge Base System.
-"""
 import streamlit as st
 
-def main():
-    st.set_page_config(page_title="Intelligent Doc Analysis", layout="wide")
-    st.title("Intelligent Document Analysis & Knowledge Base")
-    st.write("Welcome to the system. Use the sidebar to navigate between pages.")
+st.set_page_config(
+    page_title="Intelligens-Dokumentum-Elemző"
+    page_icon="🐕"
+    layout="wide"
+)
 
-if __name__ == "__main__":
-    main()
+dashboard_page = st.Page(
+    "pages/dashboard.py",
+    title="Vezérlőpult",
+    icon="⚙️"
+)
+
+analysis_page = st.Page(
+    "pages/analysis.py",
+    title="Elemzés és Eredmények",
+    icon="📉"
+)
+
+chat_page = st.Page(
+    "pages/chat.py",
+    title="Dobby",
+    icon="🧝"
+)
+
+pg = st.navigation([dashboard_page, analysis_page, chat_page])
+
+pg.run()
