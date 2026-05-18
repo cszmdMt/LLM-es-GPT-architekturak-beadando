@@ -23,9 +23,15 @@ if st.button("Feldolgozás indítása", type="primary"):
         with st.spinner("Dokumentumok elemzése folyamatban..."):
 
             raw_text = extract_text_from_pdf(uploaded_files)
+
+            if not raw_text.strip():
+                st.error("Nem sikerült kinyerni a szöveget!")
+                st.session_state.is_processed = False
+                st.stop()
+
+            
             chunks = create_text_chunks(raw_text)
-
-
+            
             st.session_state.pdf_text = raw_text
             st.session_state.text_chunks = chunks
             st.session_state.is_processed = True

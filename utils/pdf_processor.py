@@ -1,17 +1,23 @@
-from PyPDF2 import PdfReader
+import fitz  # PyMuPDF
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-def extract_text_from_pdf(pdf_file):
+def extract_text_from_pdf(pdf_files):
+    """
+    Extracts text from a list of PDF files using PyMuPDF.
+    
+    Args:
+        pdf_files: A list of file-like objects (e.g., from st.file_uploader).
+        
+    Returns:
+        A string containing all extracted text.
+    """
     text = ""
-    for pdf in pdf_file:
-        pdf_reader = PdfReader(pdf)
-
-        for page in pdf_reader.pages:
-            extracted = page.extract_text()
-            
-            if extracted:
-                text += "\n"
-
+    for pdf_file in pdf_files:
+        # Open the PDF from the stream
+        doc = fitz.open(stream=pdf_file.read(), filetype="pdf")
+        for page in doc:
+            text += page.get_text()
+        doc.close()
     return text
 
 def create_text_chunks(text):
