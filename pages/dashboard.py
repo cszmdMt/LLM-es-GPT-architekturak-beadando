@@ -1,7 +1,37 @@
-"""
-Dashboard page providing an overview of the system and uploaded documents.
-"""
 import streamlit as st
 
-st.header("System Dashboard")
-st.info("Overview of processed documents and system status.")
+from utils.pdf_processor import extract_text_from_pdf
+from utils.pdf_processor import create_text_chunks
+
+from utils.state_manager import init_session_state
+
+
+st.title("Vezérlőpult")
+st.markdown("Ide töltsd fel a dokumentumokat majd indítsd el a feldolgozást, hogy a rendszer feldolgozhassa.\n" \
+            "Fontos, hogy a program csak PDF kiterjesztésű fájlokat fogad el!")
+
+init_session_state()
+
+uploaded_files = st.file_uploader(
+    "Ide töltsd fel a PDF fájl(okat):",
+    type="pdf",
+    accept_multiple_files=True
+)
+
+if st.button("Feldolgozás indítása", type="primary"):
+    if uploaded_files:
+        with st.spinner("Dokumentumok elemzése folyamatban..."):
+
+            raw_text = extract_text_from_pdf(uploaded_files)
+            chunks = create_text_chunks(raw_text)
+
+
+            st.session_state.pdf_text = raw_text
+            st.session_state.text_chunks = chunks
+            st.session_state.is_processed = True
+
+        st.success("A PDF feldolgozása, sikeres volt!")
+
+    else:
+        st.warning("Legalább egy PDF-et tölts fel!")
+
